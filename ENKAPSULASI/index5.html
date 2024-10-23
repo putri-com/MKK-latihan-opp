@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enkapsulasi</title>
+</head>
+<body>
+    <script>
+    //   metode  publik, value nya tidak bisa diubah  
+        class Buku {
+            constructor(JudulBuku, PenulisBuku, TahunTerbit) {
+                this._judulBuku = JudulBuku; 
+                this._penulisBuku = PenulisBuku; 
+                this._tahunTerbit = TahunTerbit; 
+            }
+
+            // Getter untuk judul
+            get judul() {
+                return this._judulBuku;
+            }
+
+            // Getter untuk penulis
+            get penulis() {
+                return this._penulisBuku;
+            }
+
+            // Getter untuk tahun terbit
+            get tahunTerbit() {
+                return this._tahunTerbit;
+            }
+
+            // Metode untuk menampilkan detail buku
+            BukuDetails() {
+                console.log(`Buku ini berjudul "${this._judulBuku}" yang ditulis oleh ${this._penulisBuku}, terbit ${this._tahunTerbit}`);
+            }
+        }
+
+        // membuat sub classnya
+        class BukuElektronik extends Buku {
+            constructor(JudulBuku, PenulisBuku, TahunTerbit, HargaBuku) {
+                super(JudulBuku, PenulisBuku, TahunTerbit);
+                this._hargaBuku = HargaBuku; // Publik tetapi tidak dapat diubah
+            }
+
+            // Getter untuk harga
+            get harga() {
+                return this._hargaBuku;
+            }
+
+            // Metode untuk menampilkan detail buku
+            BukuDetails() {
+                super.BukuDetails();
+                console.log(`Harga buku ini ${this._hargaBuku}`);
+            }
+        }
+
+        // membuat instancenya
+        const detailBuku = new BukuElektronik("Kimi no nawa", "Makoto Shinkai", 2016, 50000);
+        console.log(detailBuku.judul);
+        console.log(detailBuku.penulis);
+        console.log(detailBuku.tahunTerbit);
+        console.log(detailBuku.harga);
+
+        detailBuku.BukuDetails();
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enkapsulasi</title>
+</head>
+<body>
+    <script>
+        // metode publik
+        class RekeningBank {
+            static daftarRekening = []; // Menyimpan semua nomor rekening
+
+            constructor(nomorRekening, saldoAwal) {
+                this.nomorRekening = nomorRekening; // Menggunakan setter
+                this._saldo = saldoAwal;
+            }
+
+            // Setter untuk nomor rekening
+            set nomorRekening(nomor) {
+                if (RekeningBank.daftarRekening.includes(nomor)) {
+                    throw new Error(`Nomor rekening ${nomor} sudah terdaftar.`);
+                }
+                this._nomorRekening = nomor; // Menyimpan nomor rekening
+                RekeningBank.daftarRekening.push(nomor); // Menambahkan nomor rekening ke daftar
+            }
+
+            // Getter untuk nomor rekening
+            get nomorRekening() {
+                return this._nomorRekening;
+            }
+
+            // Method untuk menyetor uang
+            setorUang(jumlah) {
+                this._saldo += jumlah;
+                console.log(`Uang sebesar ${jumlah} disetorkan. Saldo sekarang: ${this._saldo}`);
+            }
+
+            // Method untuk menarik uang
+            tarikUang(jumlah) {
+                if (jumlah > this._saldo) { // Perbaiki dari this.saldo ke this._saldo
+                    console.log(`Saldo tidak cukup untuk menarik ${jumlah}. Saldo sekarang: ${this._saldo}`);
+                } else {
+                    this._saldo -= jumlah;
+                    console.log(`Uang sebesar ${jumlah} ditarik. Saldo sekarang: ${this._saldo}`);
+                }
+            }
+
+            // Method untuk menampilkan saldo
+            cekSaldo() {
+                console.log(`Saldo saat ini: ${this._saldo}`);
+            }
+        }
+
+        // Membuat 3 instance dari class RekeningBank
+        try {
+            let rekening1 = new RekeningBank("001", 1000);
+            let rekening2 = new RekeningBank("002", 2000);
+            let rekening3 = new RekeningBank("003", 3000);
+
+            // Setor uang dan tarik uang dari rekening
+            rekening1.setorUang(500);  
+            rekening1.tarikUang(200);   
+            rekening2.setorUang(1000);  
+            rekening2.tarikUang(3000);  
+            rekening3.cekSaldo();       
+
+            
+            let rekening4 = new RekeningBank("001", 1500);  
+        } catch (error) {
+            console.log(error.message); 
+        }
+    </script>
+</body>
+</html>

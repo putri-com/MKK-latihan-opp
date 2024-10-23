@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>latihan oop : protected dan publik</title>
+</head>
+<body>
+    <script>
+        class CetakNama{
+            #nama;
+        constructor(nama) {
+            this.#nama = nama;
+        }
+        get GetNama(){
+            return this.#nama;
+        }
+        set SetNama(value){ 
+             this.#nama = value;
+        }
+
+        #Hallo(nama){
+           console.log(`Haii mass ${nama}`);
+           
+        }
+        
+        #BYE(){
+            console.log(`adios amigos ${nama}`);
+            
+        }
+
+        say(nama){
+         if (nama) {
+            this.#Hallo(nama);
+         }else{
+            this.#BYE(nama);
+         }
+        }
+        }
+
+
+        const person1 = new CetakNama('Ambaatuukaam');
+        person1.nama = "rahull";
+        console.info(person1);
+        console.log(person1.nama);
+        console.log(person1.GetNama);
+        
+       const person2 = new CetakNama('Seongcheol');
+       console.log(person2.GetNama);
+       person2.nama = 'DK';
+     
+       
+    person2.say(person2.nama);
+        
+    </script>
+</body>
+</html>

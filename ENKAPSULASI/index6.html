@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enkapsulasi</title>
+</head>
+<body>
+    <script>
+        // menggunakan metode privat
+        class Employee {
+            #nama;
+            #gaji;
+            constructor(nama, gaji) {
+                this.#nama = nama; 
+                this.#gaji = gaji;
+            }
+
+            // Getter untuk nama
+            get Pegawai() {
+                return this.#nama;
+            }
+
+            // Setter untuk nama
+            set Pegawai(value) {
+                if (typeof value !== 'string') {
+                    console.log("Nama pegawai harus valid");   
+                } else {
+                    this.#nama = value;
+                }
+            }
+
+            // Getter untuk gaji
+            get Gaji() {
+                return this.#gaji;
+            }
+
+            // Setter untuk gaji
+            set Gaji(value) {
+                if (value <= 0) {
+                    console.log("Gaji harus ada"); 
+                } else {
+                    this.#gaji = value;
+                }
+            }
+
+            // metode menghitung gaji tahunan
+            hitungGaji() {
+                console.log(`${this.#nama} Gaji bulanannya ${this.#gaji} jt`);
+                const gajiTahunan = this.#gaji * 12; 
+                console.log(`Gaji tahunan ${gajiTahunan}`);
+            }
+        }
+
+        class Manager extends Employee {
+            #departemen;
+            constructor(nama, gaji, departemen) {
+                super(nama, gaji);
+                this.#departemen = departemen; 
+            }
+
+            // Getter untuk departemen
+            get Departemen() {
+                return this.#departemen;
+            }
+
+            // Setter untuk departemen
+            set Departemen(value) {
+                this.#departemen = value;
+            }
+
+            // metode menghitung gaji jika dapat bonus 10%
+            hitungGaji() {
+                super.hitungGaji();
+                console.log(`Departemen: ${this.#departemen}`); 
+                // menggunakan getter
+                const bonus = this.Gaji * 0.10;  
+                console.log(`Bonus 10% menjadi ${bonus}`); 
+            }
+        }
+
+        const person1 = new Employee("Davina", 4);
+        console.log(person1.Pegawai);
+        console.log(person1.Gaji);
+        person1.hitungGaji();
+     
+        const person2 = new Manager("Dani", 5000000, "Marketing");
+        console.log(person2.Pegawai);
+        console.log(person2.Gaji);
+        console.log(person2.Departemen);
+    
+        person2.hitungGaji();
+    </script>
+</body>
+</html>

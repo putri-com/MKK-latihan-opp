@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getter dan setter soal no 8</title>
+</head>
+<body>
+    <script>
+        class AkunBank {
+            #noRek;
+            #namaNasabah;
+            #saldo;
+            constructor(noRek, namaNasabah, saldo) {
+                this.#noRek = noRek; 
+                this.#namaNasabah = namaNasabah; 
+                this.#saldo = saldo; 
+            }
+
+            // Getter untuk noRek
+            get NoRek() {
+                return this.#noRek;  
+            }
+
+            // Getter untuk namaNasabah
+            get NamaNasabah() {
+                return this.#namaNasabah;
+            }
+
+            // Getter untuk saldo
+            get Saldo() {
+                return this.#saldo; 
+            }
+
+            // Metode untuk menyetor uang
+            menyetor(jumlah) {
+                this.#saldo += jumlah; 
+                console.log(`Uang sebesar ${jumlah} disetorkan. Saldo sekarang: ${this.Saldo}`);
+            }
+
+            // Metode untuk menarik uang
+            menarik(jumlah) {
+                if (jumlah > this.Saldo) {
+                    console.log(`${this.NamaNasabah} Saldo tidak cukup untuk menarik ${jumlah}. Saldo sekarang: ${this.Saldo}`);
+                } else {
+                    this.#saldo -= jumlah; 
+                    console.log(`Uang sebesar ${jumlah} ditarik. Saldo sekarang: ${this.Saldo}`);
+                }
+            }
+
+            // Metode untuk mentransfer uang
+            transfer(jumlah) {
+                if (jumlah > this.Saldo) {
+                    console.log(`Saldo tidak cukup untuk di transfer sebanyak ${jumlah}. Saldo anda sekarang: ${this.Saldo}`);
+                } else {
+                    this.#saldo -= jumlah; 
+                    console.log(`Uang sebesar ${jumlah} telah ditransfer! Saldo anda sekarang: ${this.Saldo}`);
+                }
+            }
+        }
+
+        const rekening = new AkunBank(121, "Firman", 200); 
+        console.log(rekening.NamaNasabah); 
+        console.log(rekening.NoRek); 
+        console.log(rekening.Saldo); 
+
+        rekening.menyetor(500);
+        rekening.menarik(200); 
+        rekening.transfer(100);
+    </script>
+</body>
+</html>

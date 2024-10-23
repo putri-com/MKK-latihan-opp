@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>protected dan publik</title>
+</head>
+<body>
+    <script>
+        // menggunakan metode privat
+        class Person {
+            #Firstname;
+            #Lastname;
+            #Age;
+            constructor(Firstname, Lastname, Age) {
+                this.#Firstname = Firstname;
+                this.#Lastname = Lastname;
+                this.#Age = Age;
+            }
+     
+            get Getfirst() {
+                return this.#Firstname;
+            }
+            set Setfirst(value) {
+                if (value.length === 0) {
+                    console.log("harus diisi");
+                } else {
+                    this.#Firstname = value;
+                }
+            }
+
+            get Getlast() {
+                return this.#Lastname;
+            }
+            
+            set Setlast(value) {
+                if (value.length === 0) {
+                    console.log("harus diisi");
+                } else {
+                    this.#Lastname = value;
+                }
+            }
+ 
+            get Getage() {
+                return this.#Age;
+            }
+            
+            set Setage(value) {
+                if (value < 0) {
+                    console.log("HARAP DIISI"); 
+                } else {
+                    this.#Age = value;
+                }
+            }
+            
+            ShowDetail() {
+                console.log(`Nama depan: ${this.Getfirst}`);
+                console.log(`Nama belakang: ${this.Getlast}`);
+                console.log(`Usia: ${this.Getage}`);
+            }
+        }
+
+        const person1 = new Person("Wiliam", "james", 25);
+        console.log(person1.Getfirst);
+        
+        person1.ShowDetail();
+    </script>
+</body>
+</html>

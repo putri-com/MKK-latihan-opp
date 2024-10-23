@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enkapsulasi</title>
+</head>
+<body>
+    <script>
+        // menggunakan metode publik, value tidak dapat diubah 
+        class Product {
+            constructor(IdProduct, nama, harga) {
+                this._IdProduct = IdProduct; 
+                this._nama = nama; 
+                this._harga = harga; 
+            }
+
+            get IdProduct() {
+                return this._IdProduct;
+            }
+
+            get Nama() {
+                return this._nama;
+            }
+
+            get Harga() {
+                return this._harga;
+            }
+
+            Hitungproduk(kuantitas) {
+                return kuantitas * this._harga;
+            }
+        }
+
+        // membuat subclass dengan override
+        class ElektronikProduct extends Product {
+            constructor(IdProduct, nama, harga, garansi) {
+                super(IdProduct, nama, harga);
+                this._garansi = garansi; 
+            }
+
+            get Garansi() {
+                return this._garansi;
+            }
+
+            Hitungproduk(kuantitas) {
+                return super.Hitungproduk(kuantitas);
+            }
+        }
+
+        // membuat instance
+        const product1 = new ElektronikProduct(1, "Setrika", 50000, "2 Tahun");
+        
+        console.log("Nama Produk: " + product1.Nama);
+        console.log("Harga Produk: " + product1.Harga);
+        console.log("Garansi: " + product1.Garansi);
+        
+        const pembelian = product1.Hitungproduk(2);
+        console.log("Total Pembelian: " + pembelian);
+    </script>
+</body>
+</html>
